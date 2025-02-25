@@ -1,0 +1,35 @@
+// The problem is that the popup closes before the form is submitted, causing an unexpected URL to appear and preventing the form from redirecting properly.
+
+// Place a HTML Snippet in your Popup with the following code:
+
+<script type='text/javascript'>
+    jQuery( document ).ready( function() {
+
+        // Listen for the click event on links that contain '#elementor-action' in the href
+        jQuery( document ).on( 'click', "a[href*='#elementor-action']", function () {
+
+            // Give the popup a little time to animate
+            setTimeout( function() {
+
+                // Initialize all Contact Form 7 forms inside Elementor popups that don't have the 'elementor' class
+                jQuery( '.elementor-popup-modal form.wpcf7-form:not(.elementor)' ).each( function ( index, element ) {
+
+                    // Initialize the form for Contact Form 7
+                    wpcf7.init( element );
+                    // Mark the form with the 'elementor' class to prevent re-initialization
+                    jQuery( this ).addClass( 'elementor' );
+
+                } );
+
+            }, 800 ); // End Timeout
+
+        } ); // End link click
+
+        // Listen for the successful submission of the Contact Form 7
+        jQuery(document).on('wpcf7mailsent', function(event) {
+            // Redirect to the desired URL after form submission
+            window.location.href = "https://example.com/thank-you"; // Replace with your desired URL
+        });
+
+    } ); // End Document Ready
+</script>
