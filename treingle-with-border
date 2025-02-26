@@ -1,0 +1,22 @@
+.triangle-left {
+  width: 0;
+  height: 0;
+  border-top: 22px solid transparent;
+  border-bottom: 22px solid transparent;
+  border-right: 22px solid black;
+  position: relative;
+}
+
+.triangle-left:after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 21px solid transparent;
+  border-bottom: 21px solid transparent;
+  border-right: 21px solid #dddddd;
+  position: absolute;
+  top: -21px;
+  left: 1px;
+}
+
+<div class="triangle-left"></div>
